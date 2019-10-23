@@ -42,10 +42,8 @@ def render_static(request):
     static_file = request.matchdict['static_file']
     if static_file == '':
         static_file = 'index.html'
-    file = open('./public/' + static_file, 'rb')
-    content = file.read()
-    file.close()
-    return Response(content)
+    with open('./public/' + static_file, 'rb') as file:
+        return Response(file.read())
 
 
 def upload_file(request):
